@@ -1,24 +1,24 @@
 import {useState} from 'react';
 import {GetServerSideProps} from 'next';
 import axios from "axios";
-import Student from "@/types/Student";
+import {Class} from "@/types/Student";
 
 
 interface ListProps {
-    data: Student[];
+    data: Class[];
 }
 
 const List = ({data}: ListProps) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredStudents, setFilteredStudents] = useState(data);
+    const [filteredClasses, setFilteredClasses] = useState(data);
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value.toLowerCase();
         setSearchTerm(value);
-        setFilteredStudents(
+        setFilteredClasses(
             data.filter(
                 (student) =>
-                    student.name.toLowerCase().includes(value) || student.class.name?.toLowerCase().includes(value)
+                    student.name.toLowerCase().includes(value)
             )
         );
     };
@@ -40,10 +40,9 @@ const List = ({data}: ListProps) => {
                 </tr>
                 </thead>
                 <tbody>
-                {filteredStudents.map((student) => (
+                {filteredClasses.map((student) => (
                     <tr key={student.id}>
                         <td>{student.name}</td>
-                        <td>{student.class.name}</td>
                     </tr>
                 ))}
                 </tbody>
@@ -53,7 +52,7 @@ const List = ({data}: ListProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const {data} = await axios.get('http://localhost:3000/student', {
+    const {data} = await axios.get('http://localhost:3000/class', {
         headers: {
             Authorization: 'Bearer admin',
         },

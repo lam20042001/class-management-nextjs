@@ -1,6 +1,6 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 import axios from 'axios';
-import Student from "@/types/Student";
+import {Student} from "@/types/Student";
 
 
 
