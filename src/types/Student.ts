@@ -1,10 +1,6 @@
-export interface Class {
-    id: number;
-    name: string;
-    Students: Partial<Student>[];
-}
+import Class from './Class';
 
-export interface Student {
+export default interface Student {
     id: number;
     name: string;
     class: Partial<Class>;

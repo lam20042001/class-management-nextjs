@@ -1,6 +1,6 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 import axios from 'axios';
-import {Student} from "@/types/Student";
+import Student from "@/types/Student";
 
 
 
@@ -10,10 +10,11 @@ interface StudentDetailProps {
 
 const StudentDetail = ({student}: StudentDetailProps) => {
     return (
-        <div>
-            <h1>Student Detail</h1>
-            <p><strong>Name:</strong> {student.name}</p>
-            <p><strong>Class:</strong> {student.class.name}</p>
+        <div className="p-6 bg-white rounded shadow-lg">
+            <h1 className="text-2xl font-bold mb-4">Student Detail</h1>
+            <p className="mb-2"><strong>ID:</strong> {student.id}</p>
+            <p className="mb-2"><strong>Name:</strong> {student.name}</p>
+            <p className="mb-2"><strong>Class:</strong> {student.class.name}</p>
         </div>
     );
 };

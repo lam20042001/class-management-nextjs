@@ -1,18 +1,18 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 import axios from 'axios';
-import {Student} from "@/types/Student";
+import Class from "@/types/Class";
 
 
-interface StudentDetailProps {
-    student: Student;
+interface ClassDetailProps {
+    classData: Class;
 }
 
-const StudentDetail = ({student}: StudentDetailProps) => {
+const ClassDetail = ({classData}: ClassDetailProps) => {
     return (
-        <div>
-            <h1>Student Detail</h1>
-            <p><strong>Name:</strong> {student.name}</p>
-            <p><strong>Class:</strong> {student.class.name}</p>
+        <div className="p-6 bg-white rounded shadow-lg">
+            <h1 className="text-2xl font-bold mb-4">Class Detail</h1>
+            <p className="mb-2"><strong>ID:</strong> {classData.id}</p>
+            <p className="mb-2"><strong>Name:</strong> {classData.name}</p>
         </div>
     );
 };
@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         },
     });
 
-    const paths = data.map((classData: Student) => ({
+    const paths = data.map((classData: Class) => ({
         params: {id: classData.id.toString()},
     }));
 
@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const {id} = context.params!;
-    const {data} = await axios.post(`http://localhost:3000/student/id`, {id: id},
+    const {data} = await axios.post(`http://localhost:3000/class/id`, {id: id},
             {
                 headers: {
                     Authorization: 'Bearer admin',
@@ -46,10 +46,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
         props: {
-            student: data,
+            classData: data,
         },
         revalidate: 10,
     };
 };
 
-export default StudentDetail;
+export default ClassDetail;

@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import Modal from '@/components/Modal';
 
 const AddClassForm = () => {
     const [name, setName] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [error, setError] = useState('');
     const router = useRouter();
-
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setError('');
+    };
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
@@ -14,19 +20,20 @@ const AddClassForm = () => {
                     Authorization: 'Bearer admin',
                 },
             });
-            router.push('/list');
-        } catch (error) {
-            console.error('Failed to add student:', error);
+            router.push('/class');
+        } catch (error:any) {
+            setIsModalOpen(true);
+            setError(error.response.data.devMessage);
+            console.error('Failed to add student:', error.response.data.devMessage);
         }
     };
 
     return (
         <div>
-            <h1>Add Student</h1>
             <form onSubmit={handleSubmit}>
                 <label>
                     Name:
-                    <input
+                    <input className='w-96 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         type="text"
                         name="name"
                         value={name}
@@ -37,6 +44,8 @@ const AddClassForm = () => {
                 <br />
                 <button type="submit">Submit</button>
             </form>
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={error}>
+            </Modal>
         </div>
     );
 };
