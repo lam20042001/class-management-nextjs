@@ -56,6 +56,7 @@ const List = ({data}: ListProps) => {
                 placeholder="Search by class name"
                 value={searchTerm}
                 onChange={handleSearch}
+                className={'my-4'}
             />
             <table className='table-auto border-collapse border-4 border-black'>
                 <thead>
