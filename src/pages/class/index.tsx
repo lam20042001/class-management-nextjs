@@ -20,13 +20,13 @@ const List = ({data}: ListProps) => {
             await axios.request({
                 url: 'http://localhost:3000/class/delete',
                 method: 'DELETE',
-                data: { id:id },
+                data: {id: id},
                 headers: {
                     Authorization: 'Bearer admin',
                 },
             });
             setFilteredClasses(filteredClasses.filter((classData) => classData.id !== id));
-        } catch (error:any) {
+        } catch (error: any) {
             setIsModalOpen(true);
             setError(error.response.data.devMessage);
             console.error('Failed to delete class:', error);
@@ -49,7 +49,7 @@ const List = ({data}: ListProps) => {
 
     return (
         <div>
-            <AddClassButton />
+            <AddClassButton/>
             <br></br>
             <input
                 type="text"
@@ -68,13 +68,17 @@ const List = ({data}: ListProps) => {
                 {filteredClasses.map((classData) => (
                     <tr key={classData.id}>
                         <td className='border-black border-4'>{classData.name}</td>
-                        <td className='border-black border-4'><Link href={`/class/detail/${classData.id}`}><button>Detail</button></Link></td>
-                        <td className='border-black border-4'><button onClick={()=>handleDelete(classData.id)}>Delete</button></td>
+                        <td className='border-black border-4'><Link href={`/class/detail/${classData.id}`}>
+                            <button>Detail</button>
+                        </Link></td>
+                        <td className='border-black border-4'>
+                            <button onClick={() => handleDelete(classData.id)}>Delete</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={error} />
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={error}/>
         </div>
     );
 };

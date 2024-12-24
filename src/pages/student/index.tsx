@@ -16,8 +16,8 @@ const List = ({data}: ListProps) => {
         try {
             await axios.request({
                 url: 'http://localhost:3000/student/delete',
-                method: 'DELETE',   
-                data: { id:id },
+                method: 'DELETE',
+                data: {id: id},
                 headers: {
                     Authorization: 'Bearer admin',
                 },
@@ -53,7 +53,7 @@ const List = ({data}: ListProps) => {
                 <tr>
                     <th className='border-black border-4'>Student Name</th>
                     <th className='border-black border-4'>Class Name</th>
-                    <th >Action</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -61,8 +61,12 @@ const List = ({data}: ListProps) => {
                     <tr key={student.id}>
                         <td className='border-black border-4'>{student.name}</td>
                         <td className='border-black border-4'>{student.class.name}</td>
-                        <td className='border-black border-4'><Link href={`/student/detail/${student.id}`}><button>Detail</button></Link></td>
-                        <td className='border-black border-4'><button onClick={()=>handleDelete(student.id)}>Delete</button></td>
+                        <td className='border-black border-4'><Link href={`/student/detail/${student.id}`}>
+                            <button>Detail</button>
+                        </Link></td>
+                        <td className='border-black border-4'>
+                            <button onClick={() => handleDelete(student.id)}>Delete</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
