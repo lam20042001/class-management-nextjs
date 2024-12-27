@@ -56,7 +56,7 @@ const List = ({data}: ListProps) => {
                 placeholder="Search by class name"
                 value={searchTerm}
                 onChange={handleSearch}
-                className={'my-4'}
+                className='my-4 border border-black rounded p-2 w-fit'
             />
             <table className='table-auto border-collapse border-4 border-black'>
                 <thead>
@@ -90,7 +90,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
             Authorization: 'Bearer admin',
         },
     });
-    console.log(data)
     return {
         props: {
             data,

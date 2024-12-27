@@ -47,7 +47,7 @@ const List = ({data}: ListProps) => {
                 placeholder="Search by student name or class name"
                 value={searchTerm}
                 onChange={handleSearch}
-                className={'my-4'}
+                className='my-4 border border-black rounded p-2 w-fit' 
             />
             <table className='table-auto border-collapse border-4 border-black'>
                 <thead>

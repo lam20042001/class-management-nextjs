@@ -54,6 +54,25 @@ const ClassDetail = ({ classData }: ClassDetailProps) => {
                     Update
                 </button>
             </form>
+            {classData.students && classData.students.length > 0 ? (
+                <table className="table-auto border-black mt-4">
+                    <thead>
+                        <tr>
+                            <th className="border-black border-2">Student Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {classData.students.map((student) => (
+                            <tr key={student.id}>
+                                <td className="border-black border-2">{student.name}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p className="mt-4 text-red-500">No students found in this class</p>
+            )}
+            
             <Modal isOpen={isModalOpen} onClose={handleCloseModal} title={error}></Modal>
         </div>
     );
